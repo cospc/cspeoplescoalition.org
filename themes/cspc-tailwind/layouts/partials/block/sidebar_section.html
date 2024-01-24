@@ -1,0 +1,28 @@
+{{- $taxonomy := .Taxonomy -}}
+{{- $context := .Context -}}
+{{- $limit := .Limit -}}
+{{ $icon := (index site.Params.taxonomies.icons $taxonomy) | default "tags" }}
+
+<section class="flex flex-col w-full gap-y-3 p-6 mt-6 text-black dark:text-red-600">
+  <div class="flex flex-row">
+    <a class="flex flex-row p-2 items-center" href='{{ (site.GetPage $taxonomy).RelPermalink }}'>
+      <i class="h-6 w-6 flex-none">
+        {{ partial "icon.html" $icon }}
+      </i>
+      <h2 class="pl-1 pb-1 lowercase font-serif text-2xl">
+        {{ T (printf "taxonomies.%s" $taxonomy) | safeHTML }}
+      </h2>
+    </a>
+  </div>
+
+  <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4">
+    {{ range first $limit $context.ByCount }}
+    <li class="">
+      <a href="{{ .Page.RelPermalink }}"
+        class="text-sm font-slab lowercase text-neutral-200 bg-black dark:bg-red-600 dark:text-black px-2 py-1">
+        {{ .Page.Title }}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>

@@ -1,0 +1,13 @@
+.cspc-event {
+    white-space: break-spaces;
+    align-items: baseline;
+}
+
+.cspc-event .fc-event-title {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.fc-toolbar-title {
+    text-align: center;
+}

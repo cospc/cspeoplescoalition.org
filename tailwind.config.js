@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -7,6 +9,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Noto Sans', ...defaultTheme.fontFamily.sans],
+        'serif': ['Noto Serif', ...defaultTheme.fontFamily.serif],
+        'slab': ['Bevan'],
+      },
       typography: {
         quoteless: {
           css: {

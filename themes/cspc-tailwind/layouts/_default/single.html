@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="w-full max-w-4xl lg:max-w-5xl">
+  <div class="flex flex-col gap-y-3 p-6 mt-6 mx-2 md:mx-0 rounded-lg shadow-md bg-neutral-200 dark:bg-white/5">
+    <h1 class="text-4xl font-semibold text-black dark:text-neutral-200">
+      <a href="{{ .RelPermalink }}">{{ .Title | .RenderString }}</a>
+    </h1>
+
+    {{ with .Description }}
+    <h2 class="my-4 text-large text-neutral-600 dark:text-neutral-300">
+      {{ . | $.Page.RenderString }}
+    </h2>
+    {{ end }}
+    {{ partial "block/taxonomies.html" .}}
+
+    {{ partial "block/time.html" . }}
+
+    <div class="w-1/2 mx-auto">
+      {{ if .Site.Params.header.darklogo }}
+      <img class="object-cover block dark:hidden" src="{{ .Site.Params.header.darklogo | relURL }}" alt="logo">
+      <img class="object-cover hidden dark:block" src="{{ .Site.Params.header.logo | relURL }}" alt="logo">
+      {{ else }}
+      <img class="object-cover" src="{{ .Site.Params.header.logo | relURL }}" alt="logo">
+      {{ end }}
+    </div>
+
+    {{ if or .Params.Toc $.Site.Params.Toc }}
+      {{ if ne .Params.Toc false }}
+      <section class="prose prose-neutral dark:prose-invert w-full max-w-4xl lg:max-w-5xl mt-6">
+        <h2>{{ T "table_of_contents" }}</h2>
+        <aside>{{ .TableOfContents }}</aside>
+      </section>
+      {{ end }}
+    {{ end }}
+
+    <article class="mt-6 w-full max-w-4xl lg:max-w-5xl prose prose-neutral dark:prose-invert prose-quoteless post-content">
+      {{ .Content | safeHTML }}
+    </article>
+
+    {{ partial "comments.html" . }}
+  </div>
+</div>
+{{ end }}

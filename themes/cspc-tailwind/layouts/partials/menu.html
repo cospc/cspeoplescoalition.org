@@ -1,0 +1,26 @@
+{{ $page := . }}
+{{ $isntDefault := not (or (eq (trim $.Site.Params.contentTypeName " ") "posts") (eq (trim $.Site.Params.contentTypeName " ") "")) }}
+{{ $contentTypeName := cond $isntDefault (string $.Site.Params.contentTypeName) "home" }}
+{{ with site.Menus.main }}
+<nav class="h-full static">
+  <button id="navbar-menu-toggle" type="button" class="inline-flex items-center p-2 text-sm text-neutral-200 dark:text-black rounded-lg md:hidden" aria-controls="navbar-menu" aria-expanded="false">
+    <span class="sr-only">{{ T "open_main_menu" }}</span>
+    <i class="w-8 h-8">
+      {{ partial "icon.html" "menu-2" }}
+    </i>
+  </button>
+  <div class="absolute md:static top-16 left-0 right-0 z-50 hidden w-full md:block md:w-auto" id="navbar-menu">
+    <ul class="flex flex-col mx-0 md:flex-row md:border-0 px-3 text-base font-medium font-slab lowercase dark-reverse-highlight shadow-lg shadow-black/5 dark:shadow-white/5 ring-1 ring-white/5 dark:ring-white/5">
+    {{ range . }}
+      {{- $isCurrent := or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) (and $page.IsHome (and .Page (eq $contentTypeName .Page.Type))) -}}
+      {{ if not .HasChildren }}
+        <li id="{{ .Identifier }}" class="">
+          <a class="block m-1 p-2 hover:text-neutral-200 {{- if $isCurrent }} text-neutral-300 {{ end -}}"
+            href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+    </ul>
+  </div>
+</nav>
+{{ end }}

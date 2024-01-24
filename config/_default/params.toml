@@ -8,22 +8,27 @@ contentTypeName = "posts"
 
 # Show table of contents at the top of your posts (defaults to false)
 # Alternatively, add this param to post front matter for specific posts
-toc = true
+toc = false
 
-showReadingTime = true
+showReadingTime = false
 
 [header]
-  logo = "cspc-logo.webp"
-  darklogo = "cspc-logo-darkmode.webp"
-  sticky = false
+  logo = "cspc-logo-darkmode.webp"
+  darklogo = "cspc-logo.webp"
+  sticky = true
 
 [footer]
   since = 2024
   poweredby = true
 
-[taxonomies.icons]
-  categories = "category-2"
-  tags = "hash"
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+  [taxonomies.icons]
+    categories = "category-2"
+    tags = "hash"
 
 # giscus is comments system powered by GitHub Discussions
 # generate configurations from https://giscus.app/
@@ -39,7 +44,6 @@ showReadingTime = true
   emitMetadata = "1"
   inputPosition = "bottom"
   lang = "en"
-  loading = "lazy"
 
 [social_media]
   [[social_media.items]]
@@ -52,7 +56,7 @@ showReadingTime = true
     enabled = false
     title = 'Twitter'
     icon = 'brand-x'
-    link = 'https://twitter.com/__PurPleFoX__'
+    link = 'https://twitter.com/'
 
   [[social_media.items]]
     enabled = true

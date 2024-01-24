@@ -1,0 +1,17 @@
+{{ with .Description }}
+  <h3 class="my-4 text-large text-neutral-700 dark:text-neutral-300">
+    {{ . | $.Page.RenderString }}
+  </h3>
+{{ else }}
+  {{ if .Truncated }}
+  <h3 class="my-4 text-large text-neutral-700 dark:text-neutral-300">
+    {{ .Summary }}
+  </h3>
+  {{ end }}
+{{ end }}
+<a href="{{ .RelPermalink }}" class="mr-0 ml-auto -mt-8 flex flex-row text-sm text-neutral-700 dark:text-neutral-300">
+  <span>read in full</span>
+  <i class="h-6 w-6 flex-none">
+    {{ partial "icon.html" "chevron-right"}}
+  </i>
+</a>

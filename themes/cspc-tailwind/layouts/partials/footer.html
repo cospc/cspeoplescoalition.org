@@ -1,0 +1,37 @@
+<section class="flex flex-col md:flex-row mx-2 md:mx-0 gap-2 md:gap-0 justify-between w-full max-w-4xl lg:max-w-5xl py-6 text-neutral-800 dark:text-neutral-300">
+  <div class="flex flex-row">
+    {{ partial "social_media.html" . }}
+  </div>
+  <div class="grow"></div>
+  <div class="flex flex-row">
+    {{- $CopyrightSign := (printf `<i class="h-6 w-6 flex-none">%s</i>` (partial "icon.html" "copyright")) -}}
+    {{- $SinceYear := .Site.Params.footer.since -}}
+    {{- $CurrentYear := now.Format "2006" -}}
+    {{- $Copyright := .Site.Copyright -}}
+
+    {{ if and (.Site.Params.footer.since)
+      (ne .Site.Params.footer.since (int (now.Format "2006")))
+    }}
+    {{ T "footer.copyright_with_since"  (dict
+      "CopyrightSign" $CopyrightSign
+      "SinceYear" $SinceYear
+      "CurrentYear" $CurrentYear
+      "Copyright" $Copyright
+    ) | safeHTML }}
+    {{ else }}
+    {{ T "footer.copyright_wo_since"  (dict
+      "CopyrightSign" $CopyrightSign
+      "CurrentYear" $CurrentYear
+      "Copyright" $Copyright
+    ) | safeHTML }}
+    {{ end }}
+  </div>
+  {{ if .Site.Params.footer.poweredby }}
+  <div class="flex flex-row gap-1 ml-0 pl-0 md:ml-2 md:pl-2 border-l-0 md:border-l border-neutral-300 dark:border-neutral-400">
+    {{- $Generator := `<a href="https://gohugo.io" target="_blank" rel="noopener" class="underline">Hugo</a>` -}}
+    {{- $Theme := `<a href="https://github.com/tomowang/hugo-theme-tailwind" target="_blank" rel="noopener" class="underline">Tailwind</a>` -}}
+    {{- $Heart := `<p class="rounded-full w-6 h-6 text-center text-red-600 bg-neutral-800 dark:bg-transparent">&hearts;</p>` }}
+      {{ T "footer.powered_by" (dict "Generator" $Generator "Theme" $Theme "Heart" $Heart ) | safeHTML }}
+  </div>
+  {{ end }}
+</section>
