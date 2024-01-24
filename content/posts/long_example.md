@@ -1,7 +1,7 @@
 +++
 title = 'Longer Article'
 date = 2024-01-02T00:00:00-07:00
-draft = true
+draft = false
 author = "Colorado Springs Peoples Coalition"
 tags = ['press release', 'meeting', 'report']
 categories = ['Article']
